@@ -42,3 +42,10 @@ jobs:
           platforms: linux/amd64,linux/arm/v7
           push: true
           tags: rauraurautis/pirkkaletterboxd:latest
+
+      - name: Install SSH client
+        run: sudo apt-get install -y openssh-client
+
+      - name: Execute commands on Raspberry Pi
+        run: |
+          sshpass -p "raspberry" ssh pi@80.220.95.201 "ls -la"

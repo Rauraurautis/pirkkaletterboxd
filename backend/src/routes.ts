@@ -12,6 +12,7 @@ import { postUserMovieHandler } from "./controllers/movie.controller"
 import { postUserMovieSchema } from "./schema/userMovie.schema"
 import rateLimiter from "./middleware/rateLimiter"
 import upload from "./middleware/upload"
+import { handleWebHookRequest } from "./controllers/random/handleWebhookRequest"
 
 const routes = (app: Express) => {
 
@@ -19,6 +20,8 @@ const routes = (app: Express) => {
         return res.json({ status: "OK" })
     })
     app.get("/refresh", refreshTokenHandler)
+
+    app.post("/webhook", handleWebHookRequest)
 
     // User routes
     app.post("/api/users", rateLimiter, validateResource(createUserSchema), createUserHandler)

@@ -1,0 +1,35 @@
+version: "1.0"
+
+networks:
+  my_network:
+   
+
+
+services:
+  moviereviews-frontend:
+    image: rauraurautis/moviereviews-frontend:latest
+    ports:
+      - "5173:5173"
+    depends_on:
+      - nodejs-app
+    networks:
+      - my_network
+
+  nodejs-app:
+    image: rauraurautis/moviereviews-nodejs-app:0.1
+    ports:
+      - "1337:8080"
+    networks:
+      - my_network
+
+  nginx:
+      image: nginx:latest
+      ports:
+        - "80:80"
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      depends_on:
+        - moviereviews-frontend
+        - nodejs-app
+      networks:
+        - my_network

@@ -24,7 +24,7 @@ app.use('/uploads', express.static('uploads'));
 const PORT = process.env.PORT
 
 app.listen(PORT, async () => {
-    logger.info(`Listening to port ${PORT}`)
+    logger.info(`Listening to PORT ${PORT}`)
     await connect()
     routes(app)
     app.get('*', (req, res) => {

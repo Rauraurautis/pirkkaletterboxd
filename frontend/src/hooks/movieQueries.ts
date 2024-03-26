@@ -18,7 +18,7 @@ export const usePopularMoviesQuery = () => {
         queryKey: ['popularMovies'],
         queryFn: async () => {
             const movies = await getPopularMovies()
-            setFetchedMovies(movies)
+            setFetchedMovies(movies.slice(0, 12))
             return movies
         },
         refetchOnWindowFocus: false,

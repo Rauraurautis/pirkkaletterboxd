@@ -19,10 +19,28 @@ export const useAllReviewsQuery = () => {
     return { reviews, isPending }
 }
 
+export const useLatestReviewsQuery = () => {
+    const [reviews, setReviews] = useState<ReviewType[]>([])
+
+    const { isPending } = useQuery({
+        queryKey: ['allReviews'],
+        queryFn: async () => {
+            const reviews = await getAllReviews()
+            if (reviews) {
+                setReviews(reviews.reverse().slice(0, 6))
+            }
+            return reviews ?? []
+        },
+        refetchOnWindowFocus: false
+    })
+
+    return { reviews, isPending }
+}
+
 export const useReviewsForMovieQuery = (movieId: number) => {
     const [reviews, setReviews] = useState<ReviewType[]>([])
 
-    const { isPending} = useQuery({
+    const { isPending } = useQuery({
         queryKey: ['allReviewsForMovie'],
         queryFn: async () => {
             const reviews = await getAllReviewsForMovie(movieId)

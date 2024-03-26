@@ -4,7 +4,6 @@ import { jwtDecode } from "jwt-decode";
 export const axiosMovieDBInstance = axios.create({ baseURL: "https://api.themoviedb.org", headers: { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3Yzk1YzdkNDQ2Y2VjZjVmNmJkZjZmNGUyNGQzYmIxZSIsInN1YiI6IjYyMzExNTZlYzNiZmZlMDA0NmNkNzhmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-IWjHj-RML3oHLtM8aVAjLC57BQolVdTpte0yWCW7v0" } })
 
 const backendHost = import.meta.env.MODE === "development" ? "http://localhost:1337" : "http://80.220.95.201"
-console.log(import.meta.env.MODE)
 export const axiosApiInstance = axios.create({
     baseURL: `${backendHost}/api`
     , withCredentials: true

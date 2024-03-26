@@ -1,8 +1,8 @@
-frontend/node_modules/
+frontend/node_modules
 ./frontend/dist
 ./frontend/.env
 
-backend/node_modules/
+backend/node_modules
 ./backend/.env
 ./backend/build
 ./backend/log

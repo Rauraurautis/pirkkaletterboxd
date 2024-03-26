@@ -14,7 +14,7 @@ import path from "path";
 const app = express()
 
 app.use(cors({ origin: ["http://80.220.95.201", "http://localhost:5173"], optionsSuccessStatus: 200, credentials: true }))
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client')));
 app.use(helmet({ crossOriginResourcePolicy: false }))
 app.use(cookieParser())
 app.use(express.json())
@@ -28,7 +28,7 @@ app.listen(PORT, async () => {
     await connect()
     routes(app)
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+        res.sendFile(path.join(__dirname, '../client', 'index.html'));
     });
     app.use(errorHandler)
 })

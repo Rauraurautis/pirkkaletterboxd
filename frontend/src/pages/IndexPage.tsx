@@ -4,7 +4,7 @@ import MovieReview from '../components/reviews/MovieReviewCard'
 import { useAppStateStore } from '../lib/store/AppStateStore'
 import { usePopularMoviesQuery } from '../hooks/movieQueries'
 
-import { useAllReviewsQuery, useLatestReviewsQuery } from '../hooks/reviewQueries'
+import { useLatestReviewsQuery } from '../hooks/reviewQueries'
 import { ReviewType } from '../lib/types'
 import MovieThumbnail from '../components/movies/MovieThumbnail'
 

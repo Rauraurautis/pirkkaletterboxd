@@ -17,7 +17,7 @@ export type ReviewSearchType = { searchMode: "movie", value: any } | null
 
 const ReviewsPage: FC<ReviewsPageProps> = ({ }) => {
   const [page, setPage] = useState(0)
-  const [searchParams, setSearchParams] = useSearchParams({ searchMode: "", searchQuery: "" })
+  const [_, setSearchParams] = useSearchParams({ searchMode: "", searchQuery: "" })
   const [searchMode, setSearchMode] = useState<ReviewSearchType | null>(null)
   const { reviews = [], isPending, refetch } = useReviewSearchQuery(searchMode?.value ?? null)
   const [review, setReview] = useState<ReviewType | null>(null)

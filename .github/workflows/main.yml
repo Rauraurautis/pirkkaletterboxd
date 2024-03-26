@@ -27,7 +27,7 @@ jobs:
 
       - name: Move frontend build to backend
         run: |
-          mv frontend/dist backend/client
+          mv frontend/dist backend/client/dist
 
       - name: Docker login
         uses: docker/login-action@v2

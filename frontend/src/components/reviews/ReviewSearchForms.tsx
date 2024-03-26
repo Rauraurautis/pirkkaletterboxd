@@ -3,14 +3,14 @@ import { FieldValues, useForm } from 'react-hook-form'
 import { ReviewSearchType } from '../../pages/ReviewsPage'
 
 interface ReviewSearchFormsProps {
-    setSearchMode: React.Dispatch<React.SetStateAction<ReviewSearchType>>
+    applySearch: (val: ReviewSearchType | null) => void
 }
 
-const ReviewSearchForms: FC<ReviewSearchFormsProps> = ({ setSearchMode }) => {
+const ReviewSearchForms: FC<ReviewSearchFormsProps> = ({ applySearch }) => {
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const handleReviewSearch = async (e: FieldValues) => {
-        setSearchMode({ searchMode: "movie", value: e.movie })
+        applySearch({ searchMode: "movie", value: e.movie })
     }
     return (
         <div className="flex w-full lg:w-[50%] justify-around">

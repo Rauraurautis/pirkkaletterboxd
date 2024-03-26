@@ -43,7 +43,7 @@ export const Layout = () => {
     return (
         <>
             <ToastContainer position="bottom-left" />
-            <main className="w-dvw h-dvh flex flex-col items-center justify-between gap-5 overflow-y-auto bg-zinc-900"  >
+            <main className="w-dvw h-dvh flex flex-col items-center justify-between gap-5 overflow-y-auto bg-zinc-900 overflow-x-hidden"  >
                 <div className="w-[90%]">
                     <Navbar setLoginDialog={setLoginDialog} setReviewDialog={setReviewDialog} />
                 </div>

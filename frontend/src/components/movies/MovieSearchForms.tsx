@@ -1,32 +1,48 @@
-import { FC, memo } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { searchMoviesByGenre, searchMoviesByName } from '../../services/movieServices'
-import { MovieSearchType } from '../../lib/types'
+import { MovieSearchParams, MovieSearchType } from '../../lib/types'
 import { genres } from '../../lib/utils/data'
 import { useAppStateStore } from '../../lib/store/AppStateStore'
+import { SetURLSearchParams } from 'react-router-dom'
 
 interface MovieSearchFormsProps {
-    setSearchMode: React.Dispatch<React.SetStateAction<MovieSearchType>>
-
+    searchParams: MovieSearchParams
+    applySearch: (val: MovieSearchType | null) => void
+    setSearchParams: SetURLSearchParams
 }
 
 
 
-const MovieSearchForms: FC<MovieSearchFormsProps> = memo(({ setSearchMode }) => {
+const MovieSearchForms: FC<MovieSearchFormsProps> = memo(({ applySearch, searchParams, setSearchParams }) => {
     const { register: registerNameSearch, handleSubmit: handleNameSubmit, formState: { errors: name_errors }, } = useForm()
     const { register: registerGenreSearch, handleSubmit: handleGenreSubmit } = useForm()
     const setFetchedMovies = useAppStateStore(state => state.setFetchedMovies)
 
+    useEffect(() => {
+        if (searchParams.searchMode == "name") {
+            (async () => {
+                const movies = await searchMoviesByName(searchParams.searchQuery || "")
+                setFetchedMovies(movies)
+            })()
+        } else if (searchParams.searchMode == "genre") {
+            (async () => {
+                const movies = await searchMoviesByGenre(Number(searchParams.searchQuery + "") || 0)
+                setFetchedMovies(movies)
+            })()
+        }
+    }, [])
+
     const handleNameSearch = async (e: FieldValues) => {
         const movies = await searchMoviesByName(e.name)
         setFetchedMovies(movies)
-        setSearchMode({ searchMode: "name", value: e.name })
+        applySearch({ searchMode: "name", value: e.name })
     }
 
     const handleGenreSearch = async (e: FieldValues) => {
         const movies = await searchMoviesByGenre(e.genre)
         setFetchedMovies(movies)
-        setSearchMode({ searchMode: "genre", value: e.genre })
+        applySearch({ searchMode: "genre", value: e.genre })
     }
 
     return (
@@ -42,7 +58,13 @@ const MovieSearchForms: FC<MovieSearchFormsProps> = memo(({ setSearchMode }) => 
             <div className="flex flex-col items-center gap-2">
                 <h2 className='underline underline-offset-[5px]'>Search by Genre</h2>
                 <form className="flex flex-col gap-5 items-center" onSubmit={handleGenreSubmit(handleGenreSearch)}>
-                    <select className="p-1" {...registerGenreSearch("genre")}>
+                    <select
+                        className="p-1" {...registerGenreSearch("genre")}
+                        onChange={(e) => setSearchParams(prev => {
+                            prev.set("searchMode", "genre")
+                            prev.set("searchQuery", e.target.value)
+                            return prev
+                        })}>
                         {genres.map((genre, i) => (
                             <option key={i} value={genre.id}>{genre.name}</option>
                         ))}

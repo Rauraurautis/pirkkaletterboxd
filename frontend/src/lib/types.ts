@@ -17,47 +17,47 @@ export type MovieType = {
     release_date: string;
 };
 
- /* export type SingleMovieType = {
-    adult: boolean;
-    backdrop_path: string;
-    belongs_to_collection: null | any; // You might want to replace 'any' with a specific type if there is a collection type
-    budget: number;
-    genres: {
-        id: number;
-        name: string;
-    }[];
-    homepage: string;
-    id: number;
-    imdb_id: string;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    production_companies: {
-        id: number;
-        logo_path: string | null;
-        name: string;
-        origin_country: string;
-    }[];
-    production_countries: {
-        iso_3166_1: string;
-        name: string;
-    }[];
-    release_date: string;
-    revenue: number;
-    runtime: number;
-    spoken_languages: {
-        english_name: string;
-        iso_639_1: string;
-        name: string;
-    }[];
-    status: string;
-    tagline: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
+/* export type SingleMovieType = {
+   adult: boolean;
+   backdrop_path: string;
+   belongs_to_collection: null | any; // You might want to replace 'any' with a specific type if there is a collection type
+   budget: number;
+   genres: {
+       id: number;
+       name: string;
+   }[];
+   homepage: string;
+   id: number;
+   imdb_id: string;
+   original_language: string;
+   original_title: string;
+   overview: string;
+   popularity: number;
+   poster_path: string;
+   production_companies: {
+       id: number;
+       logo_path: string | null;
+       name: string;
+       origin_country: string;
+   }[];
+   production_countries: {
+       iso_3166_1: string;
+       name: string;
+   }[];
+   release_date: string;
+   revenue: number;
+   runtime: number;
+   spoken_languages: {
+       english_name: string;
+       iso_639_1: string;
+       name: string;
+   }[];
+   status: string;
+   tagline: string;
+   title: string;
+   video: boolean;
+   vote_average: number;
+   vote_count: number;
 }; */
 
 export type ReviewType = {
@@ -100,3 +100,5 @@ export type LoginUser = {
 export type ReviewSearchType = { searchMode: "user", value: any } | { searchMode: "movie", value: any } | null
 
 export type MovieSearchType = { searchMode: "name", value: any } | { searchMode: "genre", value: any } | null
+
+export type MovieSearchParams = { searchMode: string | null, searchQuery: string | null }

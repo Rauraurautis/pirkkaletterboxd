@@ -1,4 +1,5 @@
 import { intervalToDuration } from "date-fns";
+import { genres } from "./data";
 
 export const formatMinutesToHoursAndMinutes = (minutes: number | undefined) => {
 
@@ -30,4 +31,8 @@ export const releaseYear = (date: string) => {
 
 export const capitalizeString = (str: string) => {
     return str.charAt(0).toUpperCase() + str.substring(1)
+}
+
+export const deriveGenre = (genreId: number) => {
+    return genres.find(genre => genre.id === genreId)?.name ?? "No genre found"
 }

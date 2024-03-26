@@ -1,14 +1,15 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { usePopularMoviesQuery } from '../hooks/movieQueries'
 import MovieThumbnail from '../components/movies/MovieThumbnail'
 import MovieSearchForms from '../components/movies/MovieSearchForms';
-import { MovieSearchType} from '../lib/types';
-import { Outlet } from 'react-router-dom';
+import { MovieSearchType } from '../lib/types';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import { useAuthStore } from '../lib/store/AuthStore';
 import { getUserData } from '../services/movieServices';
 import { useAppStateStore } from '../lib/store/AppStateStore';
+import { deriveGenre } from '../lib/utils/utils';
 
 interface MoviesPageProps {
 
@@ -16,11 +17,11 @@ interface MoviesPageProps {
 
 const MoviesPage: FC<MoviesPageProps> = ({ }) => {
   const [searchMode, setSearchMode] = useState<MovieSearchType>(null)
+  const [searchParams, setSearchParams] = useSearchParams({ searchMode: "", searchQuery: "" })
   const fetchedMovies = useAppStateStore(state => state.fetchedMovies)
   const [page, setPage] = useState(0)
   const { isPending } = usePopularMoviesQuery()
   const { user, setUserMovies } = useAuthStore(state => ({ user: state.user, setUserMovies: state.setUserMovies }))
-  
 
   useEffect(() => {
     if (user?.movies.length === 0) {
@@ -34,6 +35,18 @@ const MoviesPage: FC<MoviesPageProps> = ({ }) => {
     setPage(0)
   }, [searchMode])
 
+  const applySearch = useCallback((val: MovieSearchType | null) => {
+    if (val) {
+      setSearchParams(prev => {
+        prev.set("searchMode", val.searchMode)
+        prev.set("searchQuery", val.value)
+        return prev
+      })
+      console.log("we")
+      setSearchMode(val)
+    }
+  }, [setSearchMode])
+
 
   const visibleMovies = page === 0 ? fetchedMovies.slice(0, 6) : fetchedMovies.slice(page * 6, page * 6 + 6)
 
@@ -41,12 +54,12 @@ const MoviesPage: FC<MoviesPageProps> = ({ }) => {
     <>
       <Outlet context={visibleMovies} />
       <section className="h-full w-full flex flex-col items-center gap-20 animate-fadeIn">
-        <MovieSearchForms setSearchMode={setSearchMode} />
+        <MovieSearchForms applySearch={applySearch} searchParams={{ searchMode: searchParams.get("searchMode"), searchQuery: searchParams.get("searchQuery") }} setSearchParams={setSearchParams} />
         <div className="flex flex-col items-center gap-5 relative w-dvw select-none">
           <h2 className="text-2xl">
             {!searchMode && "Popular movies right now"}
             {searchMode?.searchMode === "name" && `Movies found with the search term '${searchMode.value}'`}
-            {searchMode?.searchMode === "genre" && `Movies found with the genre '${searchMode.value}'`}
+            {searchMode?.searchMode === "genre" && `Movies found with the genre '${deriveGenre(Number(searchMode.value))}'`}
           </h2>
           <div className="w-[50%] h-[1px] bg-white"></div>
           <div className="grid gap-5 grid-cols-3 md:grid-cols-6 w-[90%] h-full min-h-[300px]">

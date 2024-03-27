@@ -1,5 +1,6 @@
 import { QueryClient } from "@tanstack/react-query"
 import { getUserData } from "../services/movieServices"
+import { axiosMovieDBInstance } from "../services/axiosInstance"
 
 
 export const userDataLoader =
@@ -25,3 +26,9 @@ export const userDataLoader =
                 await queryClient.fetchQuery(query)
             )
         }
+
+export const singleMovieDataLoader = () =>
+    async ({ params }: { params: any }) => {
+        const movie = await axiosMovieDBInstance(`/3/movie/${params.id}`)
+        return movie.data
+    }

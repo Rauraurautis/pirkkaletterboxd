@@ -13,7 +13,7 @@ const getPopularMovies = async () => {
 
 export const usePopularMoviesQuery = () => {
     const setFetchedMovies = useAppStateStore(state => state.setFetchedMovies)
-
+    console.log("fetch")
     const { isPending, data } = useQuery({
         queryKey: ['popularMovies'],
         queryFn: async () => {

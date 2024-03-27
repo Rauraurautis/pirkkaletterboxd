@@ -15,7 +15,7 @@ import UserPage from "../pages/UserPage";
 import ErrorPage from "../pages/ErrorPage";
 
 import { QueryClient } from "@tanstack/react-query";
-import { userDataLoader } from "./routerLoaders";
+import { singleMovieDataLoader, userDataLoader } from "./routerLoaders";
 
 
 
@@ -79,6 +79,7 @@ export const router = createBrowserRouter([
                     {
                         path: "/movies/:id",
                         element: <MovieDetailsPage />,
+                        loader: singleMovieDataLoader()
                     }
                 ]
             },

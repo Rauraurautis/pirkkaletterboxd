@@ -10,7 +10,6 @@ interface AppStateStore {
 export const useAppStateStore = create<AppStateStore>((set) => ({
     fetchedMovies: [],
     setFetchedMovies: (movies: MovieType[]) => {
-        console.log(movies)
         set(state => ({ ...state, fetchedMovies: movies }))
     }
 })) 

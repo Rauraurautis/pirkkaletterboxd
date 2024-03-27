@@ -12,7 +12,7 @@ const MovieThumbnail: FC<MovieThumbnailProps> = ({ movie }) => {
 
     return (
         <div className="relative max-w-[400px] w-full  flex flex-col items-center">
-            <NavLink to={`/movies/${id}`}><img src={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : defaultImage} className="h-full object-contain cursor-pointer hover:brightness-75 hover:translate-y-[-5px] transition-all" /></NavLink>
+            <a target='_blank' href={`/movies/${id}`}><img  src={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : defaultImage} className="h-full object-contain cursor-pointer hover:brightness-75 hover:translate-y-[-5px] transition-all" /></a>
         </div>
     )
 }

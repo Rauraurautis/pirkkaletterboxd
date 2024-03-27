@@ -42,7 +42,6 @@ const MoviesPage: FC<MoviesPageProps> = ({ }) => {
         prev.set("searchQuery", val.value)
         return prev
       })
-      console.log("we")
       setSearchMode(val)
     }
   }, [setSearchMode])

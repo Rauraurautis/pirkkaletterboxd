@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20 AS nodeapp
 
 WORKDIR /app
 
@@ -10,6 +10,10 @@ COPY . .
 
 ENV PORT=8080
 
-EXPOSE 8080
+FROM nginx:latest
 
-CMD ["npm", "start"]
+COPY --from=nodeapp app/client /var/www/pirkkaletterboxdclient
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

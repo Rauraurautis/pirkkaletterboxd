@@ -14,6 +14,7 @@ export type MovieType = {
     overview: string;
     poster_path: string;
     genre_ids: number[];
+    genres?: {id: number, name: string}[]
     release_date: string;
 };
 

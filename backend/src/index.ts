@@ -13,7 +13,7 @@ import path from "path";
 
 const app = express()
 
-app.use(cors({ origin: ["http://80.220.95.201", "http://localhost:5173"], optionsSuccessStatus: 200, credentials: true }))
+app.use(cors({ origin: ["http://80.220.95.201", "http://localhost:5173", "http://localhost"], optionsSuccessStatus: 200, credentials: true }))
 app.use(express.static(path.join(__dirname, '../client')));
 app.use(helmet({ crossOriginResourcePolicy: false }))
 app.use(cookieParser())

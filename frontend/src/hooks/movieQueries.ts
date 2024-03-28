@@ -5,32 +5,39 @@ import { axiosMovieDBInstance } from "../services/axiosInstance"
 import { getUserData } from "../services/movieServices"
 import { useAppStateStore } from "../lib/store/AppStateStore"
 
-const getPopularMovies = async () => {
+export const getPopularMovies = async () => {
     const response = await axiosMovieDBInstance("/3/trending/movie/day?language=en-US")
     const data: MovieType[] = response.data.results
     return data
 }
 
-export const usePopularMoviesQuery = () => {
-    const setFetchedMovies = useAppStateStore(state => state.setFetchedMovies)
-    console.log("fetch")
-    const { isPending, data } = useQuery({
-        queryKey: ['popularMovies'],
-        queryFn: async () => {
-            const movies = await getPopularMovies()
-            setFetchedMovies(movies.slice(0, 12))
-            return movies
-        },
-        refetchOnWindowFocus: false,
+export const useMoviesQuery = (mode?: "popular" | null) => {
+    const { fetchedMovies: { movies }, setFetchedMovies } = useAppStateStore(state => ({ fetchedMovies: state.fetchedMovies, setFetchedMovies: state.setFetchedMovies }))
+    if (mode === "popular") {
+        const { isPending, data } = useQuery({
+            queryKey: ['movies'],
+            queryFn: async () => {
+                console.log("asd")
+                const movies = await getPopularMovies()
+                setFetchedMovies("popularMovies", movies.slice(0, 12))
+                return movies
+            },
+            refetchOnWindowFocus: false,
+        })
+        return { data: data ?? [], isPending }
+    }
 
-    })
+    if (movies.length > 0) {
+        return { data: movies, isPending: false }
+    }
 
-    return { data, isPending }
+
+    return { data: [], isPending: false }
 }
 
 export const useSingleMovieQuery = (id: number) => {
     const [movie, setMovie] = useState<MovieType | null>()
-   
+
     const { data, isFetching } = useQuery({
         queryKey: ['singleMovieData'],
         queryFn: async () => {

@@ -45,14 +45,14 @@ const ReviewsPage: FC<ReviewsPageProps> = ({ }) => {
     <section className="h-full  flex flex-col items-center gap-20 animate-fadeIn">
       {review && <MovieReview review={review} setReview={setReview} />}
       <ReviewSearchForms applySearch={applySearch} />
-      <div className="flex flex-col items-center gap-5 relative w-dvw select-none">
+      <div className="flex flex-col items-center gap-5 relative w-full select-none">
         <h2 className="text-2xl">
           {!searchMode && "Random user reviews"}
           {searchMode && reviews.length === 0 && `No reviews found with the movie search term '${searchMode.value}'`}
           {searchMode && reviews.length! > 0 && `Reviews found for '${searchMode.value}'`}
         </h2>
         <div className="w-[50%] h-[1px] bg-white"></div>
-        <div className="grid gap-5 grid-cols-3 md:grid-cols-6 w-[90%] h-full min-h-[500px]">
+        <div className="grid gap-5 grid-cols-3 xl:grid-cols-6 w-full h-full min-h-[500px]">
           {isPending ? <h1>Loading</h1> : <>{
             visibleReviews.map((review, i) => (
               <MovieReviewThumbnail key={i} review={review} setReview={setReview} />

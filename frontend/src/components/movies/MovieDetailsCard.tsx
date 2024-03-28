@@ -18,7 +18,7 @@ interface MovieDetailsCardProps {
 const MovieDetailsCard: FC<MovieDetailsCardProps> = ({ movie, genres, setReview }) => {
     const { reviews, isPending } = useReviewsForMovieQuery(Number(movie.id))
     const { user, setUserMovies, loggedIn } = useAuthStore(state => ({ user: state.user, setUserMovies: state.setUserMovies, loggedIn: state.loggedIn }))
-    
+
     const addMovieToWatched = async () => {
         if (user) {
             const addedMovie = await addMovieForUser(user?._id, { watched: true, movie: { ...movie } })
@@ -53,6 +53,9 @@ const MovieDetailsCard: FC<MovieDetailsCardProps> = ({ movie, genres, setReview 
                     </a>
                     <h2 className="text-2xl">{movie.title} {`(${releaseYear(movie.release_date)})`}</h2>
                     <div className="flex gap-2 flex-wrap max-w-[300px]">
+                        {movie.genres && movie.genres.map((genre, i) => (
+                            <div className="bg-blue-500 py-1 px-3 rounded-xl select-none text-nowrap" key={i}>{genre.name}</div>
+                        ))}
                         {genres?.map((genre, i) => (
                             <div className="bg-blue-500 py-1 px-3 rounded-xl select-none text-nowrap" key={i}>{genre}</div>
                         ))}

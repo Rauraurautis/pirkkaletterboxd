@@ -1,15 +1,17 @@
 import { create } from "zustand"
 import { MovieType } from "../types"
+import { persist } from "zustand/middleware"
 
 
 interface AppStateStore {
-    fetchedMovies: MovieType[]
-    setFetchedMovies: (movies: MovieType[]) => void
+    fetchedMovies: { type: "searchedMovies" | "popularMovies", movies: MovieType[] }
+    setFetchedMovies: (type: "searchedMovies" | "popularMovies", movies: MovieType[]) => void
 }
 
-export const useAppStateStore = create<AppStateStore>((set) => ({
-    fetchedMovies: [],
-    setFetchedMovies: (movies: MovieType[]) => {
-        set(state => ({ ...state, fetchedMovies: movies }))
-    }
-})) 
+export const useAppStateStore = create<AppStateStore, [["zustand/persist", AppStateStore]]>(
+    persist((set) => ({
+        fetchedMovies: { type: "popularMovies", movies: [] },
+        setFetchedMovies: (type: "searchedMovies" | "popularMovies", movies: MovieType[]) => {
+            set(state => ({ ...state, fetchedMovies: { type, movies } }))
+        }
+    }), { name: "movie-storage" })) 

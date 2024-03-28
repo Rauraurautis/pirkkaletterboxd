@@ -15,7 +15,7 @@ import UserPage from "../pages/UserPage";
 import ErrorPage from "../pages/ErrorPage";
 
 import { QueryClient } from "@tanstack/react-query";
-import { singleMovieDataLoader, userDataLoader } from "./routerLoaders";
+import {  userDataLoader } from "./routerLoaders";
 
 
 
@@ -43,11 +43,11 @@ export const Layout = () => {
     return (
         <>
             <ToastContainer position="bottom-left" />
-            <main className="w-dvw h-dvh flex flex-col items-center justify-between gap-5 overflow-y-auto bg-zinc-900 overflow-x-hidden"  >
-                <div className="w-[90%]">
+            <main className="w-dvw h-dvh flex flex-col items-center justify-between gap-5 overflow-y-auto bg-zinc-900 overflow-x-hidden">
+                <div className="w-[90%] max-w-[2000px]">
                     <Navbar setLoginDialog={setLoginDialog} setReviewDialog={setReviewDialog} />
                 </div>
-                <div className="w-[90%] flex flex-col items-center gap-10" >
+                <div className="w-[90%] flex flex-col items-center gap-10 max-w-[2000px]">
                     {loginDialog && <LoginDialog setLoginDialog={setLoginDialog} />}
                     {reviewDialog && <AddReviewDialog setReviewDialog={setReviewDialog} />}
                     <Outlet />
@@ -79,7 +79,7 @@ export const router = createBrowserRouter([
                     {
                         path: "/movies/:id",
                         element: <MovieDetailsPage />,
-                        loader: singleMovieDataLoader()
+
                     }
                 ]
             },

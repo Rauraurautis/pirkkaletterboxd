@@ -16,7 +16,7 @@ interface MovieDetailsPageProps {
 const MovieDetailsPage: FC<MovieDetailsPageProps> = ({ }) => {
     const { id } = useParams()
     const fetchedMovies = useAppStateStore(state => state.fetchedMovies)
-    const [movie, setMovie] = useState<MovieType | undefined>(fetchedMovies.find(movie => String(movie.id) === id))
+    const [movie, setMovie] = useState<MovieType | undefined>(fetchedMovies.movies.find(movie => String(movie.id) === id))
     const [review, setReview] = useState<ReviewType | null>(null)
 
     useEffect(() => {

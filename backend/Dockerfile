@@ -12,7 +12,7 @@ ENV PORT=8080
 
 FROM nginx:latest
 
-COPY --from=nodeapp /app/client /usr/share/nginx/html
+COPY --from=nodeapp /client /usr/share/nginx/html
 
 EXPOSE 80
 

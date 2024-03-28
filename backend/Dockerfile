@@ -16,4 +16,4 @@ COPY --from=nodeapp /app/client /usr/share/nginx/html
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;", "npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]

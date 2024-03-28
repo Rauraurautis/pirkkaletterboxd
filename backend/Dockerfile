@@ -12,7 +12,7 @@ ENV PORT=8080
 
 FROM nginx:latest
 
-COPY --from=nodeapp app/client /var/www/pirkkaletterboxd/client
+COPY --from=nodeapp app/client /var/www/pirkkaletterboxdclient
 
 EXPOSE 80
 

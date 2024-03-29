@@ -25,7 +25,7 @@ const MovieSearchForms: FC<MovieSearchFormsProps> = memo(({ applySearch, searchP
             (async () => {
                 if (searchParams.searchQuery === "") {
                     const movies = await getPopularMovies()
-                    setFetchedMovies("searchedMovies" ,movies)
+                    setFetchedMovies("searchedMovies", movies)
                     return
                 }
                 const movies = await searchMoviesByName(searchParams.searchQuery as string)
@@ -56,7 +56,7 @@ const MovieSearchForms: FC<MovieSearchFormsProps> = memo(({ applySearch, searchP
             <div className="flex flex-col items-center gap-2">
                 <h2 className='underline underline-offset-[5px]'>Search by name</h2>
                 <form className="flex flex-col gap-5 items-center" onSubmit={handleNameSubmit(handleNameSearch)}>
-                    <input type="text" {...registerNameSearch("name", { required: true })} placeholder='Movie name' className='p-1' />
+                    <input type="text" {...registerNameSearch("name", { required: true })} placeholder='Movie name' className='p-1 bg-gray-800 text-white' />
                     {name_errors.name && <p className="text-red-600">Enter a movie name or a part of a movie name!</p>}
                     <button className="p-2 bg-blue-800 w-fit">Search</button>
                 </form>
@@ -65,7 +65,7 @@ const MovieSearchForms: FC<MovieSearchFormsProps> = memo(({ applySearch, searchP
                 <h2 className='underline underline-offset-[5px]'>Search by Genre</h2>
                 <form className="flex flex-col gap-5 items-center" onSubmit={handleGenreSubmit(handleGenreSearch)}>
                     <select
-                        className="p-1" {...registerGenreSearch("genre")}>
+                        className="p-1 bg-gray-800 text-white" {...registerGenreSearch("genre")}>
                         {genres.map((genre, i) => (
                             <option key={i} value={genre.id}>{genre.name}</option>
                         ))}

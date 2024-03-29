@@ -1,24 +1,15 @@
-version: '1.0'
+version: '3'
 services:
-  frontend:
+  web:
     build:
       context: frontend
       dockerfile: ./Dockerfile
     ports:
-      - "5173:5173"
+      - "80:80"
+  
   backend:
     build:
       context: backend
       dockerfile: ./Dockerfile
-    ports:
-      - "1337:8080"
-  web:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./frontend/dist:/usr/share/nginx/html
-    ports:
-      - "80:80"
-volumes:
-  asd:
-  local: true
+    ports: 
+      - "8080:8080"

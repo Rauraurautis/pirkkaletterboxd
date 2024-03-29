@@ -16,12 +16,12 @@ import { handleWebHookRequest } from "./controllers/random/handleWebhookRequest"
 
 const routes = (app: Express) => {
 
-    app.get("/healthcheck", (req: Request, res: Response) => {
+    app.get("/api/healthcheck", (req: Request, res: Response) => {
         return res.json({ status: "OK" })
     })
-    app.get("/refresh", refreshTokenHandler)
+    app.get("/api/refresh", refreshTokenHandler)
 
-    app.post("/webhook", handleWebHookRequest)
+    app.post("/api/webhook", handleWebHookRequest)
 
     // User routes
     app.post("/api/users", rateLimiter, validateResource(createUserSchema), createUserHandler)

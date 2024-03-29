@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20 as builder
 
 WORKDIR /app
 
@@ -8,10 +8,16 @@ RUN npm install
 
 COPY . .
 
-ENV PORT=5173
+RUN npm run build
 
-ENV NODE_ENV=development
+FROM nginx:stable
 
-EXPOSE 5000
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-CMD ["npm", "run", "dev"]
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+
+

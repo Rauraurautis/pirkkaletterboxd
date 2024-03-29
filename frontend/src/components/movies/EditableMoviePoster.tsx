@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import defaultImage from "../../assets/images/default-movie.png"
 
 
@@ -12,22 +12,24 @@ import { addMovieForUser } from '../../services/userServices'
 interface EditableMoviePosterProps {
     movie: MovieType
     watched: boolean
-    userId: string
-    setNewWatched?: (movie: UserMovieType) => void
+    userId?: string
+    setMovieToWatched?: (movie: UserMovieType) => void
 }
 
-const EditableMoviePoster: FC<EditableMoviePosterProps> = ({ movie, watched, userId, setNewWatched }) => {
+const EditableMoviePoster: FC<EditableMoviePosterProps> = ({ movie, watched, userId, setMovieToWatched }) => {
     const { poster_path, id } = movie
     const [hoverMode, setHoverMode] = useState(false)
     const { user } = useAuthStore(state => ({ setUserMovies: state.setUserMovies, user: state.user }))
 
     const addToWatched = async () => {
-        const data = { movie: movie, watched: true }
-        console.log(user?.movies)
-        const changedMovie = await addMovieForUser(userId, data)
-        toast(`Added movie ${movie.title} to watched!`)
-        if (changedMovie && setNewWatched) {
-            setNewWatched(changedMovie)
+        if (userId) {
+            const data = { movie: movie, watched: true }
+            console.log(user?.movies)
+            const changedMovie = await addMovieForUser(userId, data)
+            toast(`Added movie ${movie.title} to watched!`)
+            if (changedMovie && setMovieToWatched) {
+                setMovieToWatched(changedMovie)
+            }
         }
     }
 

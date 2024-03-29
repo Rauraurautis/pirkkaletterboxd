@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { User } from '../../lib/types'
 import { editUser } from '../../services/userServices'
+import { toast } from 'react-toastify'
 
 interface UserDetailsFormProps {
     user: User | null
@@ -8,21 +9,28 @@ interface UserDetailsFormProps {
 
 const UserDetailsForm: FC<UserDetailsFormProps> = ({ user }) => {
 
-    
+
 
     const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (user) {
-            const formData = new FormData()
+        try {
+            if (user) {
+                const formData = new FormData()
 
-            if (e.target.files) {
-                let image = e.target.files[0]
-                formData.append("avatar", image)
+                if (e.target.files) {
+                    let image = e.target.files[0]
+                    formData.append("avatar", image)
+                }
+                formData.append("email", user.email)
+                formData.append("name", user.name)
+
+                const editedUser = await editUser(user._id, formData)
+                if (editedUser) {
+                    toast.success("Avatar updated!")
+                }
+                return editedUser
             }
-            formData.append("email", user.email)
-            formData.append("name", user.name)
-
-            const editedUser = await editUser(user._id, formData)
-            return editedUser
+        } catch (error) {
+            toast.error("Image too large, max size 1 MB!")
         }
     }
 

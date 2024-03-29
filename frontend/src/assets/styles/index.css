@@ -17,3 +17,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+input {
+  background: rgb(45, 48, 71);
+  color: white; 
+}
+

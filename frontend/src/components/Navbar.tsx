@@ -69,7 +69,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
                         </div>}
                 </div>
                 <div className="w-[50px] ">
-                    <img src={user?.avatar_path ? user.avatar_path : defaultProfile} className='rounded-full hover:cursor-pointer hover:brightness-90' />
+                    <img src={user?.avatar_path ? `http://80.220.95.201/api/${user.avatar_path}` : defaultProfile} className='rounded-full hover:cursor-pointer hover:brightness-90' />
                 </div>
             </div>
         </nav >

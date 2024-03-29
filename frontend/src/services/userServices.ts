@@ -35,7 +35,8 @@ export const editUser = async (userId: string, user: FormData): Promise<User | u
     try {
         const response = await axiosApiInstance.put(`/users/${userId}`, user)
         return response.data
-    } catch (error) {
+    } catch (error: any) {
         console.error(error)
+        throw Error(error.message)
     }
 }

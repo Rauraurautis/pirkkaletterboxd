@@ -15,17 +15,7 @@ import UserPage from "../pages/UserPage";
 import ErrorPage from "../pages/ErrorPage";
 
 import { QueryClient } from "@tanstack/react-query";
-import {  userDataLoader } from "./routerLoaders";
-
-
-
-
-
-
-
-
-
-
+import { userDataLoader } from "./routerLoaders";
 
 export const Layout = () => {
     const setUser = useAuthStore(state => state.setUser)
@@ -64,11 +54,13 @@ const queryClient = new QueryClient()
 
 export const router = createBrowserRouter([
     {
+
         element: <Layout />,
         errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
+
                 element: <IndexPage />,
                 errorElement: <h1>Error</h1>
             },

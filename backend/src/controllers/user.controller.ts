@@ -39,7 +39,7 @@ export const getUserDataHandler = async (req: Request<{ username: string }, {}, 
 export const editUserHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const avatarFilePath = req.file.path
-        if (req.file.path) req.body = { ...req.body, avatar_path: `http://localhost:1337/${avatarFilePath}` }
+        if (req.file.path) req.body = { ...req.body, avatar_path: avatarFilePath }
         const user = res.locals.user as JwtPayload
         const foundUser = await editUser(req.params.userId, user._id, req.body)
         return res.send(omit(foundUser.toJSON(), "password"))

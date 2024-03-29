@@ -23,6 +23,7 @@ export const useMoviesQuery = (mode?: "popular" | null) => {
                 return movies
             },
             refetchOnWindowFocus: false,
+            
         })
         return { data: data ?? [], isPending }
     }

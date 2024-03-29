@@ -1,11 +1,11 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { useParams, useLoaderData } from 'react-router-dom'
 
 import { useAuthStore } from '../lib/store/AuthStore'
 
 import defaultProfile from "../assets/images/profile_default.jpg"
 import UserDetailsForm from '../components/user/UserDetailsForm'
-import { ReviewType, User, UserMovieType } from '../lib/types'
+import { ReviewType, UserMovieType } from '../lib/types'
 import MovieReviewThumbnail from '../components/reviews/MovieReviewThumbnail'
 import MovieReview from '../components/reviews/MovieReviewCard'
 import EditableMoviePoster from '../components/movies/EditableMoviePoster'

@@ -1,6 +1,4 @@
 import { FC, useState } from 'react'
-
-import { NavLink, useNavigate } from 'react-router-dom'
 import defaultImage from "../../assets/images/default-movie.png"
 
 
@@ -8,6 +6,7 @@ import { toast } from 'react-toastify'
 import { useAuthStore } from '../../lib/store/AuthStore'
 import { MovieType, UserMovieType } from '../../lib/types'
 import { addMovieForUser } from '../../services/userServices'
+import { NavLink } from 'react-router-dom'
 
 interface EditableMoviePosterProps {
     movie: MovieType

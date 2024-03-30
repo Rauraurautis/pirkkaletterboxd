@@ -35,7 +35,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
         <nav className="w-full flex flex-col items-center gap-3 justify-center p-5 rounded-b-xl bg-black bg-opacity-15 h-[125px] xl:justify-between xl:h-[100px] xl:flex-row lg:gap-0 relative">
             {dropdownOpen && <DropdownMenu setLoginDialog={setLoginDialog} setReviewDialog={setReviewDialog} navigateToPage={navigateToPage} />}
             <div className="text-xs lg:text-base text-center">
-                <NavLink to="/"><h1 className="text-2xl lg:text-4xl text-center cursor-pointer text-green-500">Pirkka Letterboxd</h1></NavLink>
+                <NavLink to="/"><h1 className="text-2xl lg:text-4xl text-center cursor-pointer text-blue-800">Pirkka Letterboxd</h1></NavLink>
             </div>
             <div className="text-white flex items-center gap-10 justify-between w-[90%] sm:justify-around sm:w-auto">
                 <div className="flex sm:hidden">

@@ -49,7 +49,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
                         <h2 onClick={() => navigateToPage("/reviews")}>Reviews</h2>
                     </div>
                     <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" onClick={handleReviewClick}>
-                        <h2>Review a movie now</h2>
+                        <h2>Review a movie</h2>
                     </div>
                 </div>
                 <span className="hidden lg:flex text-blue-900 text-xl">|||</span>

@@ -52,7 +52,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
                         <h2>Review a movie</h2>
                     </div>
                 </div>
-                <span className="hidden lg:flex text-blue-900">|||</span>
+                <span className="hidden lg:flex text-blue-900">|</span>
                 <div className="hidden lg:flex gap-5">
                     {loggedIn ?
                         <>

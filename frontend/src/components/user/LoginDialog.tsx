@@ -24,9 +24,9 @@ const LoginDialog: FC<LoginDialogProps> = ({ setLoginDialog }) => {
             if (loginData) {
                 toast("Succesfully logged in")
                 setAccessToken(loginData.accessToken)
-                const user = getUser()
-                if (user) {
-                    setUser(user)
+                const userData = await getUser()
+                if (userData?.user) {
+                    setUser(userData.user)
                 }
                 setLoginDialog(false)
             }

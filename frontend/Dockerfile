@@ -1,5 +1,9 @@
 FROM node:20 as builder
 
+ARG VITE_IP_ADDRESS
+
+ENV VITE_IP_ADDRESS=80.220.95.201
+
 WORKDIR /app
 
 COPY package*.json ./

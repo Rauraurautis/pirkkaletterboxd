@@ -1,12 +1,14 @@
 import { jwtDecode } from "jwt-decode"
 import { TokenPayload } from "../types"
+import { getUserData } from "../../services/movieServices"
 
-export const getUser = () => {
+export const getUser = async () => {
     const accessToken = localStorage.getItem("accessToken")
 
     if (accessToken) {
         const { user }: TokenPayload = jwtDecode(accessToken)
-        return user
+        const userData = await getUserData(user.name)
+        return { user, userData }
     }
     return null
 }

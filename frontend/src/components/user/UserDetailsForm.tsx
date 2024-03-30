@@ -2,13 +2,14 @@ import { FC } from 'react'
 import { User } from '../../lib/types'
 import { editUser } from '../../services/userServices'
 import { toast } from 'react-toastify'
+import { useAuthStore } from '../../lib/store/AuthStore'
 
 interface UserDetailsFormProps {
     user: User | null
 }
 
 const UserDetailsForm: FC<UserDetailsFormProps> = ({ user }) => {
-
+    const setUser = useAuthStore(state => state.setUser)
 
 
     const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +27,7 @@ const UserDetailsForm: FC<UserDetailsFormProps> = ({ user }) => {
                 const editedUser = await editUser(user._id, formData)
                 if (editedUser) {
                     toast.success("Avatar updated!")
+                    setUser({...user, avatar_path: editedUser.avatar_path})
                 }
                 return editedUser
             }

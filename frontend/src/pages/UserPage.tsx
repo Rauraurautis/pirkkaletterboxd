@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useParams, useLoaderData } from 'react-router-dom'
 
 import { useAuthStore } from '../lib/store/AuthStore'
@@ -10,6 +10,7 @@ import MovieReviewThumbnail from '../components/reviews/MovieReviewThumbnail'
 import MovieReview from '../components/reviews/MovieReviewCard'
 import EditableMoviePoster from '../components/movies/EditableMoviePoster'
 import MovieThumbnail from '../components/movies/MovieThumbnail'
+import axios from 'axios'
 
 interface UserPageProps {
 
@@ -22,6 +23,13 @@ const UserPage: FC<UserPageProps> = ({ }) => {
     const user = useAuthStore(state => state.user)
     const [wantedMovies, setWantedMovies] = useState<UserMovieType[]>(fetchedWantedMovies)
     const [watchedMovies, setWatchedMovies] = useState<UserMovieType[]>(fetchedWatchedMovies)
+    const [avatar, setAvatar] = useState<string | null>(null)
+
+    useEffect(() => {
+        const address = import.meta.env.VITE_IP_ADDRESS
+        axios.get(`http://${address}/api/${avatar_path}`).then(_ => setAvatar(`http://${address}/api/${avatar_path}`)).catch(_ => { return })
+    }, [])
+
 
     const isOwner = user?.name === username
 
@@ -41,7 +49,7 @@ const UserPage: FC<UserPageProps> = ({ }) => {
             {review && <MovieReview review={review} setReview={setReview} />}
             <div className="w-[40%] h-full flex justify-center bg-zinc-900 bg-opacity-90">
                 <div className=" flex flex-col items-center gap-5">
-                    <img src={avatar_path ? `http://80.220.95.201/api/${avatar_path}` : defaultProfile} className="rounded-full w-[100px] md:w-[200px]" />
+                    <img src={avatar ? avatar : defaultProfile} className="rounded-full w-[100px] md:w-[200px]" />
                     {isOwner && <UserDetailsForm user={user} />}
                 </div>
             </div>

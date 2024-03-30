@@ -16,7 +16,7 @@ const IndexPage: FC<IndexPageProps> = memo(({ }) => {
     const { reviews, isPending: isPendingLatestReviews } = useLatestReviewsQuery()
     const { data: fetchedMovies, isPending: isPendingMovies } = useMoviesQuery("popular")
     const [review, setReview] = useState<ReviewType | null>(null)
-
+    
     if (isPendingLatestReviews && isPendingMovies && reviews.length === 0) {
         return <div className=""></div>
     }
@@ -26,10 +26,8 @@ const IndexPage: FC<IndexPageProps> = memo(({ }) => {
             {review && <MovieReview review={review} setReview={setReview} />}
             <section className="h-full w-full flex flex-col items-center gap-20" >
                 <div className="flex flex-col  w-full gap-10 ">
-                    <div className="">
                         <h2 className="text-2xl">Random movie reviews</h2>
-                        <div className="w-[50%] h-[1px] bg-white"></div>
-                    </div>
+                        <div className="w-[50%] h-[1px]  bg-white"></div>
                     <div className="grid grid-cols-3 gap-3 xl:grid-cols-6 w-full">
                         {isPendingLatestReviews ?
                             <div className="">Loading</div>

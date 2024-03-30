@@ -13,16 +13,17 @@ interface ErrorPageProps {
 
 const ErrorPage: FC<ErrorPageProps> = ({ }) => {
 
-    const setUser = useAuthStore(state => state.setUser)
+    const { setUser } = useAuthStore(state => ({ setUser: state.setUser, user: state.user }))
     const [loginDialog, setLoginDialog] = useState(false)
     const [reviewDialog, setReviewDialog] = useState(false)
 
 
     useEffect(() => {
-        const user = getUser()
-        if (user) {
-            setUser({ ...user })
-        }
+        getUser()
+            .then(data => {
+                if (data?.user && data.userData)
+                    setUser({ ...data.user, avatar_path: data.userData?.avatar_path })
+            })
     }, [])
 
     return (

@@ -15,7 +15,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
     const { loggedIn, logout, user } = useAuthStore(state => ({ loggedIn: state.loggedIn, logout: state.logout, user: state.user }))
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const navigate = useNavigate()
-
+   
     const handleReviewClick = () => {
         if (loggedIn) {
             setReviewDialog(true)

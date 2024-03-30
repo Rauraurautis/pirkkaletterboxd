@@ -1,4 +1,4 @@
-import { Express, Request, Response } from "express"
+import express, { Express, Request, Response } from "express"
 import validateResource from "./middleware/validateResource"
 import { createUserSchema } from "./schema/user.schema"
 import { createUserHandler, editUserHandler, getSingleUserHandler, getUserDataHandler } from "./controllers/user.controller"
@@ -15,7 +15,7 @@ import upload from "./middleware/upload"
 import { handleWebHookRequest } from "./controllers/random/handleWebhookRequest"
 
 const routes = (app: Express) => {
-
+    app.use('/api/uploads', express.static('uploads'));
     app.get("/api/healthcheck", (req: Request, res: Response) => {
         return res.json({ status: "OK" })
     })

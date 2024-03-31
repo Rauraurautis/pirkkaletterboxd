@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../lib/store/AuthStore'
 import hamburger from "../assets/images/hamburger.png"
 import DropdownMenu from './DropdownMenu'
+import { useAvatar } from '../hooks/useAvatar'
 
 interface NavbarProps {
     setLoginDialog: React.Dispatch<React.SetStateAction<boolean>>
@@ -14,6 +15,7 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
     const { loggedIn, logout, user } = useAuthStore(state => ({ loggedIn: state.loggedIn, logout: state.logout, user: state.user }))
     const [dropdownOpen, setDropdownOpen] = useState(false)
+    const avatar = useAvatar(user?.avatar_path)
     const navigate = useNavigate()
    
     const handleReviewClick = () => {
@@ -39,7 +41,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
             </div>
             <div className="text-white flex items-center gap-10 justify-between w-[90%] sm:justify-around sm:w-auto">
                 <div className="flex sm:hidden">
-                    <img src={hamburger} onClick={() => setDropdownOpen(prev => !prev)} className="w-[50px] cursor-pointer" />
+                    <img src={hamburger}  onClick={() => setDropdownOpen(prev => !prev)} className="w-[50px] cursor-pointer" />
                 </div>
                 <div className="hidden sm:flex gap-5">
                     <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" >
@@ -69,7 +71,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
                         </div>}
                 </div>
                 <div className="w-[50px] ">
-                    <img src={user?.avatar_path ? `http://80.220.95.201/api/${user.avatar_path}` : defaultProfile} className='rounded-full hover:cursor-pointer hover:brightness-90' />
+                    <img src={avatar ? avatar : defaultProfile} className='rounded-full hover:cursor-pointer hover:brightness-90' />
                 </div>
             </div>
         </nav >

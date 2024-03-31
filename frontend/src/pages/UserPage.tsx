@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { useParams, useLoaderData } from 'react-router-dom'
 
 import { useAuthStore } from '../lib/store/AuthStore'
@@ -10,7 +10,7 @@ import MovieReviewThumbnail from '../components/reviews/MovieReviewThumbnail'
 import MovieReview from '../components/reviews/MovieReviewCard'
 import EditableMoviePoster from '../components/movies/EditableMoviePoster'
 import MovieThumbnail from '../components/movies/MovieThumbnail'
-import axios from 'axios'
+import { useAvatar } from '../hooks/useAvatar'
 
 interface UserPageProps {
 
@@ -23,13 +23,7 @@ const UserPage: FC<UserPageProps> = ({ }) => {
     const user = useAuthStore(state => state.user)
     const [wantedMovies, setWantedMovies] = useState<UserMovieType[]>(fetchedWantedMovies)
     const [watchedMovies, setWatchedMovies] = useState<UserMovieType[]>(fetchedWatchedMovies)
-    const [avatar, setAvatar] = useState<string | null>(null)
-
-    useEffect(() => {
-        const address = import.meta.env.VITE_IP_ADDRESS
-        axios.get(`http://${address}/api/${avatar_path}`).then(_ => setAvatar(`http://${address}/api/${avatar_path}`)).catch(_ => { return })
-    }, [])
-
+    const avatar = useAvatar(avatar_path)
 
     const isOwner = user?.name === username
 

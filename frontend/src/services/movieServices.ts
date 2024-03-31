@@ -29,7 +29,6 @@ type UserData = {
 export const getUserData = async (username: string): Promise<UserData | undefined> => {
     try {
         const response = await axiosApiInstance.get(`/users/${username}/movies`)
-        console.log(response.data)
         return response.data
     } catch (error) {
         console.error(error)

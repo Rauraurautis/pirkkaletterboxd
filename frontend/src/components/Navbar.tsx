@@ -15,9 +15,8 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
     const { loggedIn, logout, user } = useAuthStore(state => ({ loggedIn: state.loggedIn, logout: state.logout, user: state.user }))
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const avatar = useAvatar(user?.avatar_path)
+    const avatar = useAvatar()
     const navigate = useNavigate()
-   
     const handleReviewClick = () => {
         if (loggedIn) {
             setReviewDialog(true)
@@ -41,7 +40,7 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
             </div>
             <div className="text-white flex items-center gap-10 justify-between w-[90%] sm:justify-around sm:w-auto">
                 <div className="flex sm:hidden">
-                    <img src={hamburger}  onClick={() => setDropdownOpen(prev => !prev)} className="w-[50px] cursor-pointer" />
+                    <img src={hamburger} onClick={() => setDropdownOpen(prev => !prev)} className="w-[50px] cursor-pointer" />
                 </div>
                 <div className="hidden sm:flex gap-5">
                     <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" >

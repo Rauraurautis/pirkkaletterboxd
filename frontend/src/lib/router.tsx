@@ -36,17 +36,17 @@ export const Layout = () => {
         <>
             <ToastContainer position="bottom-left" />
             <div className="w-dvw h-dvh flex flex-col items-center justify-between gap-5 overflow-y-auto bg-zinc-900 overflow-x-hidden">
-                <div className="w-[90%] max-w-[2000px]">
+                <nav className="w-[90%] max-w-[2000px]">
                     <Navbar setLoginDialog={setLoginDialog} setReviewDialog={setReviewDialog} />
-                </div>
+                </nav>
                 <main className="w-[90%] flex flex-col items-center gap-10 max-w-[2000px]">
                     {loginDialog && <LoginDialog setLoginDialog={setLoginDialog} />}
                     {reviewDialog && <AddReviewDialog setReviewDialog={setReviewDialog} />}
                     <Outlet />
                 </main>
-                <div className="w-[90%] flex flex-col gap-10">
+                <footer className="w-[90%] flex flex-col gap-10">
                     <Footer />
-                </div>
+                </footer>
             </div >
         </>
     )

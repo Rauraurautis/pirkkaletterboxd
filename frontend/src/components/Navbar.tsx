@@ -33,47 +33,47 @@ const Navbar: FC<NavbarProps> = ({ setLoginDialog, setReviewDialog }) => {
 
 
     return (
-        <nav className="w-full flex flex-col items-center gap-3 justify-center p-5 rounded-b-xl bg-black bg-opacity-15 h-[125px] xl:justify-between xl:h-[100px] xl:flex-row lg:gap-0 relative">
+        <ul className="w-full flex flex-col items-center gap-3 justify-center p-5 rounded-b-xl bg-black bg-opacity-15 h-[125px] xl:justify-between xl:h-[100px] xl:flex-row lg:gap-0 relative">
             {dropdownOpen && <DropdownMenu setLoginDialog={setLoginDialog} setReviewDialog={setReviewDialog} navigateToPage={navigateToPage} />}
-            <div className="text-xs lg:text-base text-center">
+            <li className="text-xs lg:text-base text-center">
                 <NavLink to="/"><h1 className="text-2xl lg:text-4xl text-center cursor-pointer text-blue-800">Pirkka Letterboxd</h1></NavLink>
-            </div>
+            </li>
             <div className="text-white flex items-center gap-10 justify-between w-[90%] sm:justify-around sm:w-auto">
                 <div className="flex sm:hidden">
                     <img src={hamburger} onClick={() => setDropdownOpen(prev => !prev)} className="w-[50px] cursor-pointer" />
                 </div>
-                <div className="hidden sm:flex gap-5">
-                    <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" >
+                <li className="hidden sm:flex gap-5">
+                    <li className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" >
                         <h2 onClick={() => navigateToPage("/movies")}>Discover movies</h2>
-                    </div>
-                    <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform">
+                    </li>
+                    <li className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform">
                         <h2 onClick={() => navigateToPage("/reviews")}>Reviews</h2>
-                    </div>
-                    <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" onClick={handleReviewClick}>
+                    </li>
+                    <li className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" onClick={handleReviewClick}>
                         <h2>Review a movie</h2>
-                    </div>
-                </div>
+                    </li>
+                </li>
                 <span className="hidden lg:flex text-blue-900 text-3xl">|||</span>
                 <div className="hidden lg:flex gap-5">
                     {loggedIn ?
                         <>
-                            <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform">
+                            <li className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform">
                                 <NavLink to={`/user/${user?.name}`}><h2>My page</h2></NavLink>
-                            </div>
-                            <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" onClick={logout}>
+                            </li>
+                            <li className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" onClick={logout}>
                                 <h2>Sign out</h2>
-                            </div>
+                            </li>
                         </>
                         :
-                        <div className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" onClick={() => setLoginDialog(true)}>
+                        <li className="text-xl cursor-pointer hover:opacity-80 hover:translate-y-[-1px] transition-transform" onClick={() => setLoginDialog(true)}>
                             <h2>Sign in</h2>
-                        </div>}
+                        </li>}
                 </div>
                 <div className="w-[50px] ">
                     <img src={avatar ? avatar : defaultProfile} className='rounded-full hover:cursor-pointer hover:brightness-90' />
                 </div>
             </div>
-        </nav >
+        </ul>
     )
 }
 

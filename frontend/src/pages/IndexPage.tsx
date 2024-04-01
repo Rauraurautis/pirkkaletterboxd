@@ -48,7 +48,6 @@ const IndexPage: FC<IndexPageProps> = memo(({ }) => {
                         }
                     </div>
                 </div>
-
             </section>
         </>
     )

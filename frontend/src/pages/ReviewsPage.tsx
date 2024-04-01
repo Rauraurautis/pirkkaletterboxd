@@ -42,7 +42,7 @@ const ReviewsPage: FC<ReviewsPageProps> = ({ }) => {
   }, [setSearchMode])
 
   return (
-    <section className="h-full  flex flex-col items-center gap-20 animate-fadeIn">
+    <section className="h-full w-full flex flex-col items-center gap-20 animate-fadeIn">
       {review && <MovieReview review={review} setReview={setReview} />}
       <ReviewSearchForms applySearch={applySearch} />
       <div className="flex flex-col items-center gap-5 relative w-full select-none">

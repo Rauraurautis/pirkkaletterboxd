@@ -28,16 +28,16 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
-          context: backend/.
-          platforms: linux/amd64,linux/arm/v7
-          push: true
-          tags: rauraurautis/pirkkaletterboxd-backend:latest
-
-      - name: Build and push image
-        uses: docker/build-push-action@v5
-        with:
             context: frontend/.
             platforms: linux/amd64,linux/arm/v7
             push: true
             tags: rauraurautis/pirkkaletterboxd-client-nginx:latest
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: backend/.
+          platforms: linux/amd64,linux/arm/v7
+          push: true
+          tags: rauraurautis/pirkkaletterboxd-backend:latest
 

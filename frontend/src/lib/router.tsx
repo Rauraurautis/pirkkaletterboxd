@@ -47,7 +47,7 @@ export const Layout = () => {
                 <footer className="w-[90%] flex flex-col gap-10">
                     <Footer />
                 </footer>
-            </div >
+            </div>
         </>
     )
 }

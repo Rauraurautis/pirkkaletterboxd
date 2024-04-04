@@ -9,6 +9,7 @@ import connect from "./lib/utils/connect";
 import { errorHandler } from "./middleware/errorHandler";
 import logger from "./lib/utils/logger";
 import path from "path";
+import { logUser } from "./middleware/logUser";
 
 
 const app = express()
@@ -19,6 +20,7 @@ app.use(helmet({ crossOriginResourcePolicy: false }))
 app.use(cookieParser())
 app.use(express.json())
 app.use(deserializeUser)
+app.use(logUser)
 app.use('/api/uploads', express.static('uploads'));
 
 const PORT = process.env.PORT
